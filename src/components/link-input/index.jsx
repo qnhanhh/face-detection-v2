@@ -1,5 +1,4 @@
 import { useSetRecoilState } from "recoil";
-import Clarifai from "clarifai";
 import { LinkInputState } from "../../states";
 
 // const app = new Clarifai.App({
