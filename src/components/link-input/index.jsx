@@ -1,8 +1,8 @@
-import { useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { LinkInputState } from "../../states";
 
 const LinkInput = () => {
-  const setLinkInput = useSetRecoilState(LinkInputState);
+  const [input, setLinkInput] = useRecoilState(LinkInputState);
 
   const onInputChange = (event) => {
     setLinkInput(event.target.value);
@@ -10,17 +10,10 @@ const LinkInput = () => {
 
   const onButtonSubmit = () => {
     const USER_ID = "quynhanh1806";
-    // Your PAT (Personal Access Token) can be found in the portal under Authentification
     const PAT = "160646c697974ada9516e642eb7a0da4";
     const APP_ID = "FaceDetection";
-    // Change these to whatever model and image URL you want to use
     const MODEL_ID = "face-detection";
-    const IMAGE_URL =
-      "https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/03/GettyImages-1092658864_thumb-732x549.jpg";
-
-    ///////////////////////////////////////////////////////////////////////////////////
-    // YOU DO NOT NEED TO CHANGE ANYTHING BELOW THIS LINE TO RUN THIS EXAMPLE
-    ///////////////////////////////////////////////////////////////////////////////////
+    const IMAGE_URL = input;
 
     const raw = JSON.stringify({
       user_app_id: {
@@ -47,16 +40,12 @@ const LinkInput = () => {
       body: raw,
     };
 
-    // NOTE: MODEL_VERSION_ID is optional, you can also call prediction with the MODEL_ID only
-    // https://api.clarifai.com/v2/models/{YOUR_MODEL_ID}/outputs
-    // this will default to the latest version_id
-
     fetch(
       "https://api.clarifai.com/v2/models/" + MODEL_ID + "/outputs",
       requestOptions
     )
-      .then((response) => response.text())
-      .then((result) => console.log(result));
+      .then((response) => response.json())
+      .then((result) => console.log(result.outputs[0].data.regions[0].region_info.bounding_box));
   };
 
   return (
