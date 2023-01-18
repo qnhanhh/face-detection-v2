@@ -7,6 +7,7 @@ const LinkInput = () => {
 
   const onInputChange = (event) => {
     setLinkInput(event.target.value);
+    setBoundingBox({});
   };
 
   const calculateFaceLocation = (data) => {
