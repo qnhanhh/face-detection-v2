@@ -1,11 +1,30 @@
-import { useRecoilState } from "recoil";
-import { LinkInputState } from "../../states";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { BoundingBoxState, LinkInputState } from "../../states";
 
 const LinkInput = () => {
+  const setBoundingBox = useSetRecoilState(BoundingBoxState);
   const [input, setLinkInput] = useRecoilState(LinkInputState);
 
   const onInputChange = (event) => {
     setLinkInput(event.target.value);
+  };
+
+  const calculateFaceLocation = (data) => {
+    const clarifaiFace =
+      data.outputs[0].data.regions[0].region_info.bounding_box;
+    const image = document.getElementById("inputImage");
+    const width = Number(image.width);
+    const height = Number(image.height);
+    const leftCol = clarifaiFace.left_col * width;
+    const topRow = clarifaiFace.top_row * height;
+    const rightCol = width - clarifaiFace.right_col * width;
+    const bottomRow = height - clarifaiFace.bottom_row * height;
+    setBoundingBox({
+      leftCol,
+      topRow,
+      rightCol,
+      bottomRow,
+    });
   };
 
   const onButtonSubmit = () => {
@@ -45,7 +64,8 @@ const LinkInput = () => {
       requestOptions
     )
       .then((response) => response.json())
-      .then((result) => console.log(result.outputs[0].data.regions[0].region_info.bounding_box));
+      .then((result) => calculateFaceLocation(result))
+      .catch((err) => console.error(err));
   };
 
   return (
