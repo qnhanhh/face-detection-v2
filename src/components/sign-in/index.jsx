@@ -1,11 +1,9 @@
-import { Form, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const SignIn = () => {
   return (
     <div className="flex h-screen flex-col items-center justify-center">
-      <form
-        className="bg-black/30 m-auto shadow-xl rounded px-8 pt-6 pb-6"
-      >
+      <form className="bg-black/30 m-auto shadow-xl rounded px-8 pt-6 pb-6">
         <div className="mb-4">
           <label
             className="block text-black text-sm font-bold mb-2"
@@ -37,16 +35,16 @@ const SignIn = () => {
         <div className="flex flex-col items-center justify-between">
           <button
             className="bg-white hover:bg-black text-black hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
+            type="button"
           >
-            Sign In
+            <Link to="/">Sign In</Link>
           </button>
-          <a
+          <Link
             className="align-baseline font-bold text-md text-black hover:text-white mt-4"
-            href="/register"
+            to="/register"
           >
             Register
-          </a>
+          </Link>
         </div>
       </form>
     </div>

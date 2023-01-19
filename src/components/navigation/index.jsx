@@ -1,16 +1,16 @@
-import { useRecoilState } from "recoil";
-import { SignInState } from "../../states";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Navigation = () => {
-  const [isSignIn, setIsSignIn] = useRecoilState(SignInState);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSignOutClick = () => {
-    setIsSignIn(false);
+    navigate("/signin");
   };
 
   return (
     <>
-      {isSignIn && (
+      {location.pathname === "/" && (
         <nav
           onClick={handleSignOutClick}
           className="absolute right-2 p-4 hover:cursor-pointer"
