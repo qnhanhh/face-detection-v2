@@ -5,14 +5,7 @@ import { useRecoilValue } from "recoil";
 import HomeScreen from "./components/home-screen";
 import SignIn from "./components/sign-in";
 import { SignInState } from "./states";
-import {
-  createBrowserRouter,
-  redirect,
-  Route,
-  RouterProvider,
-  Routes,
-  useNavigate,
-} from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Register from "./components/register";
 
 function App() {

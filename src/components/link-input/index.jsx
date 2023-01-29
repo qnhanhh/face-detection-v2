@@ -1,7 +1,8 @@
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { BoundingBoxState, LinkInputState } from "../../states";
+import { BoundingBoxState, LinkInputState, UserState } from "../../states";
 
 const LinkInput = () => {
+  const [currentUser, setCurrentUser] = useRecoilState(UserState);
   const setBoundingBox = useSetRecoilState(BoundingBoxState);
   const [input, setLinkInput] = useRecoilState(LinkInputState);
 
@@ -65,7 +66,22 @@ const LinkInput = () => {
       requestOptions
     )
       .then((response) => response.json())
-      .then((result) => calculateFaceLocation(result))
+      .then((result) => {
+        if (result) {
+          fetch("http://localhost:3000/image", {
+            method: "put",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              id: currentUser.id,
+            }),
+          })
+            .then((res) => res.json())
+            .then((count) =>
+              setCurrentUser({ ...currentUser, entries: count })
+            );
+        }
+        calculateFaceLocation(result);
+      })
       .catch((err) => console.error(err));
   };
 

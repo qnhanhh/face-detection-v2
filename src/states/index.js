@@ -1,4 +1,4 @@
-import { atom } from "recoil";
+import { atom, selector } from "recoil";
 
 export const LinkInputState = atom({
   key: "LinkInputState",
@@ -13,4 +13,15 @@ export const BoundingBoxState = atom({
 export const SignInState = atom({
   key: "SignInState",
   default: false
+})
+
+export const UserState = atom({
+  key: 'UserState',
+  default: {
+    id: '',
+    username: '',
+    password: '',
+    entries: 0,
+    joined: ''
+  }
 })
