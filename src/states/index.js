@@ -19,7 +19,8 @@ export const UserState = atom({
   key: 'UserState',
   default: {
     id: '',
-    username: '',
+    name: '',
+    email: '',
     password: '',
     entries: 0,
     joined: ''

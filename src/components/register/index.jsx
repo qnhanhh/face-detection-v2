@@ -7,11 +7,16 @@ const Register = () => {
   const navigate = useNavigate();
   const setUser = useSetRecoilState(UserState);
 
-  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const onUsernameChange = (event) => {
-    setUsername(event.target.value);
+  const onNameChange = (event) => {
+    setName(event.target.value);
+  };
+
+  const onEmailChange = (event) => {
+    setEmail(event.target.value);
   };
 
   const onPasswordChange = (event) => {
@@ -23,7 +28,8 @@ const Register = () => {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        username,
+        email,
+        name,
         password,
       }),
     })
@@ -45,16 +51,31 @@ const Register = () => {
         <div className="mb-4">
           <label
             className="block text-black text-sm font-bold mb-2"
-            htmlFor="username"
+            htmlFor="name"
           >
-            Username
+            Name
           </label>
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="username"
+            id="name"
             type="text"
-            placeholder="Username"
-            onChange={onUsernameChange}
+            placeholder="Name"
+            onChange={onNameChange}
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            className="block text-black text-sm font-bold mb-2"
+            htmlFor="email"
+          >
+            Email
+          </label>
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="email"
+            type="text"
+            placeholder="Email"
+            onChange={onEmailChange}
           />
         </div>
         <div className="mb-6">
