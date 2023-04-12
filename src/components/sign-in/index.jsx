@@ -7,10 +7,10 @@ const SignIn = () => {
   const navigate = useNavigate();
   const setUser = useSetRecoilState(UserState);
 
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const onUsernameChange = (event) => {
+  const onEmailChange = (event) => {
     setUsername(event.target.value);
   };
 
@@ -23,7 +23,7 @@ const SignIn = () => {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        username,
+        email,
         password,
       }),
     })
@@ -45,16 +45,16 @@ const SignIn = () => {
         <div className="mb-4">
           <label
             className="block text-black text-sm font-bold mb-2"
-            htmlFor="username"
+            htmlFor="email"
           >
-            Username
+            Email
           </label>
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="username"
+            id="email"
             type="text"
-            placeholder="Username"
-            onChange={onUsernameChange}
+            placeholder="Email"
+            onChange={onEmailChange}
           />
         </div>
         <div className="mb-6">
